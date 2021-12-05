@@ -6,6 +6,8 @@ module.exports = app => {
   // Create a new Employee
   router.post("/", employee.create);
 
+  router.post("/numbers", employee.createPhoneNumber);
+
   // Retrieve all Employee
   router.get("/", employee.findAll);
 

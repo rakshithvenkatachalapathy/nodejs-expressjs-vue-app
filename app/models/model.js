@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
   const Employee = sequelize.define("employee", {
     firstName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     },
     lastName: {
       type: Sequelize.STRING

@@ -20,5 +20,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.employee = require("./model.js")(sequelize, Sequelize);
+db.phoneNumbers = require("./contact-number.js")(sequelize, Sequelize);
+
+db.employee.hasMany(db.phoneNumbers, { as: "numbers" });
+db.phoneNumbers.belongsTo(db.employee, {
+  foreignKey: "employeeId",
+  as: "user",
+});
 
 module.exports = db;

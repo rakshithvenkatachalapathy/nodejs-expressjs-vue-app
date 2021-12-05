@@ -1,6 +1,7 @@
 const db = require("../models");
 const Employee = db.employee;
 const Op = db.Sequelize.Op;
+const Phone = db.phoneNumbers;
 
 // Create and Save a new Employee
 exports.create = (req, res) => {
@@ -33,12 +34,42 @@ exports.create = (req, res) => {
     });
 };
 
+/* 
+  "firstName": "sac ",
+    "lastName": "bs",
+    "address": "usf",
+    "dateOfJoining": "jul 2021"
+
+    "id" : 1,
+    "number":"80952345666",
+    "type":"home"
+*/
+// Create and Save new Comments
+exports.createPhoneNumber = (req, res) => {
+  const comment = 
+  {
+  text: "Hi, thank you!"
+}
+  return Phone.create({
+    phoneNumber: req.body.number,
+    type: req.body.type,
+    employeeId: req.body.id,
+  })
+    .then(() => {
+      console.log(">> Created phone number: ");
+      return comment;
+    })
+    .catch((err) => {
+      console.log(">> Error while creating phone number: ", err);
+    });
+};
+
 // Retrieve all Employee from the database.
 exports.findAll = (req, res) => {
   const title = req.query.firstName;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  Employee.findAll({ where: condition })
+  Employee.findAll({ where: condition,  include: ["numbers"],})
     .then(data => {
       res.send(data);
     })
