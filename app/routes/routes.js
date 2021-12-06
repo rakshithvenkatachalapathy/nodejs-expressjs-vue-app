@@ -15,7 +15,7 @@ module.exports = app => {
   router.get("/published", employee.findAllPublished);
 
   // Retrieve a single Employee with id
-  router.get("/:firstName", employee.findByFirstName);
+  router.get("/:firstName/:lastName", employee.findByFirstName);
 
   // Update a Employee with id
   router.put("/:id", employee.update);

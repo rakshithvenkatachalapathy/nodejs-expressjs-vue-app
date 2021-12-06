@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     address: req.body.address,
-    dateOfJoining : req.body.dateOfJoining
+    dateOfJoining: req.body.dateOfJoining
   };
 
   // Save Employee in the database
@@ -46,10 +46,10 @@ exports.create = (req, res) => {
 */
 // Create and Save new Comments
 exports.createPhoneNumber = (req, res) => {
-  const comment = 
+  const comment =
   {
-  text: "Hi, thank you!"
-}
+    text: "Hi, thank you!"
+  }
   return Phone.create({
     phoneNumber: req.body.number,
     type: req.body.type,
@@ -69,7 +69,7 @@ exports.findAll = (req, res) => {
   const title = req.query.firstName;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  Employee.findAll({ where: condition,  include: ["numbers"],})
+  Employee.findAll({ where: condition, include: ["numbers"], })
     .then(data => {
       res.send(data);
     })
@@ -84,11 +84,25 @@ exports.findAll = (req, res) => {
 // Find an Employee with a name
 exports.findByFirstName = (req, res) => {
   const firstName = req.params.firstName;
-  
+  const lastName = req.params.lastName;
+  var condition = null
+  if (!firstName && !lastName) {
+    res.status(500).send({
+      message:
+        "Both the first name and last name are nulls"
+    });
+  }
+  else {
+    condition =
+    {
+      [Op.and]: [
+        { firstName: req.params.firstName },
+        { lastName: req.params.lastName }
+      ]
+    }
+  }
 
-  var condition = firstName ? { firstName: { [Op.like]: `%${firstName}%` } } : null;
-
-  Employee.findAll({ where: condition,  include: ["numbers"],})
+  Employee.findAll({ where: condition, include: ["numbers"], })
     .then(data => {
       res.send(data);
     })
@@ -98,21 +112,6 @@ exports.findByFirstName = (req, res) => {
           err.message || "Some error occurred while retrieving the records."
       });
     });
-  // Employee.findByPk(id)
-  //   .then(data => {
-  //     if (data) {
-  //       res.send(data);
-  //     } else {
-  //       res.status(404).send({
-  //         message: `Cannot find employee with id=${id}.`
-  //       });
-  //     }
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send({
-  //       message: "Error retrieving employee with id=" + id
-  //     });
-  //   });
 };
 
 // Update a Employee by the id in the request
