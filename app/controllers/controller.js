@@ -81,25 +81,38 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Employee with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+// Find an Employee with a name
+exports.findByFirstName = (req, res) => {
+  const firstName = req.params.firstName;
+  
 
-  Employee.findByPk(id)
+  var condition = firstName ? { firstName: { [Op.like]: `%${firstName}%` } } : null;
+
+  Employee.findAll({ where: condition,  include: ["numbers"],})
     .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Cannot find employee with id=${id}.`
-        });
-      }
+      res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving employee with id=" + id
+        message:
+          err.message || "Some error occurred while retrieving the records."
       });
     });
+  // Employee.findByPk(id)
+  //   .then(data => {
+  //     if (data) {
+  //       res.send(data);
+  //     } else {
+  //       res.status(404).send({
+  //         message: `Cannot find employee with id=${id}.`
+  //       });
+  //     }
+  //   })
+  //   .catch(err => {
+  //     res.status(500).send({
+  //       message: "Error retrieving employee with id=" + id
+  //     });
+  //   });
 };
 
 // Update a Employee by the id in the request
