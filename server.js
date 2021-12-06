@@ -2,7 +2,9 @@ const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
+const path =  '/Users/rakshith/Documents/raknode/app/views/';
 const app = express();
+app.use(express.static(path));
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -23,11 +25,14 @@ db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
+app.get('/', function (req,res) {
+  res.sendFile(path + "index.html");
+})
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Emp search application" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to Emp search application" });
+// });
 
 require("./app/routes/routes")(app);
 
