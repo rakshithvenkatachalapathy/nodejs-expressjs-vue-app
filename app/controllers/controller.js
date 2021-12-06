@@ -82,11 +82,11 @@ exports.findAll = (req, res) => {
 };
 
 // Find an Employee with a name
-exports.findByFirstName = (req, res) => {
+exports.findByName = (req, res) => {
   const firstName = req.params.firstName;
   const lastName = req.params.lastName;
   var condition = null
-  if (!firstName && !lastName) {
+  if (!firstName || !lastName) {
     res.status(500).send({
       message:
         "Both the first name and last name are nulls"
@@ -101,7 +101,7 @@ exports.findByFirstName = (req, res) => {
       ]
     }
   }
-
+  console.log(condition)
   Employee.findAll({ where: condition, include: ["numbers"], })
     .then(data => {
       res.send(data);
