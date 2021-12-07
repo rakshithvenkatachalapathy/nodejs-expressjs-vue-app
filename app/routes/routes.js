@@ -1,3 +1,4 @@
+// This module is used to define the routes for the api calls
 module.exports = app => {
   const employee = require("../controllers/controller.js");
 
@@ -26,5 +27,6 @@ module.exports = app => {
   // Delete all Employee
   router.delete("/", employee.deleteAll);
 
+  // the default api which will be extended with the routes given above 
   app.use('/api/employees', router);
 };

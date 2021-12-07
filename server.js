@@ -2,6 +2,7 @@ const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
+// Change this directory to the app/views folder on your computer
 const path = '/Users/rakshith/Documents/raknode/app/views/';
 const app = express();
 app.use(express.static(path));
@@ -22,17 +23,13 @@ const db = require("./app/models");
 
 db.sequelize.sync();
 //drop the table if it already exists
+// can be used to drop all and recreate the tables
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
 app.get('/', function (req, res) {
   res.sendFile(path + "index.html");
 })
-
-// simple route
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to Emp search application" });
-// });
 
 require("./app/routes/routes")(app);
 

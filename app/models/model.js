@@ -1,3 +1,4 @@
+//This module is used to define the structure for the employees
 module.exports = (sequelize, Sequelize) => {
   const Employee = sequelize.define("employee", {
     firstName: {
@@ -10,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     address: {
       type: Sequelize.STRING
     },
-    dateOfJoining:{
+    dateOfJoining: {
       type: Sequelize.DATEONLY
     }
   });

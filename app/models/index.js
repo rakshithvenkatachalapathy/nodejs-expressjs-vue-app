@@ -21,7 +21,7 @@ db.sequelize = sequelize;
 
 db.employee = require("./model.js")(sequelize, Sequelize);
 db.phoneNumbers = require("./contact-number.js")(sequelize, Sequelize);
-
+// create the relationship where an employee can have multiple phone numbers
 db.employee.hasMany(db.phoneNumbers, { as: "numbers" });
 db.phoneNumbers.belongsTo(db.employee, {
   foreignKey: "employeeId",
