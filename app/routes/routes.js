@@ -12,9 +12,6 @@ module.exports = app => {
   // Retrieve all Employee
   router.get("/", employee.findAll);
 
-  // Retrieve all published Employee
-  router.get("/published", employee.findAllPublished);
-
   // Retrieve a single Employee with id
   router.get("/:firstName/:lastName", employee.findByName);
 
