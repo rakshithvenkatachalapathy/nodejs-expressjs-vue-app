@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     dateOfJoining:{
-      type: Sequelize.STRING
+      type: Sequelize.DATEONLY
     }
   });
 

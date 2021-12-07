@@ -2,7 +2,7 @@ const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
-const path =  '/Users/rakshith/Documents/raknode/app/views/';
+const path = '/Users/rakshith/Documents/raknode/app/views/';
 const app = express();
 app.use(express.static(path));
 
@@ -21,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is
 const db = require("./app/models");
 
 db.sequelize.sync();
-// drop the table if it already exists
+//drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
-app.get('/', function (req,res) {
+app.get('/', function (req, res) {
   res.sendFile(path + "index.html");
 })
 
