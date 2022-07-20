@@ -19,12 +19,13 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.employee = require("./model.js")(sequelize, Sequelize);
-db.phoneNumbers = require("./contact-number.js")(sequelize, Sequelize);
-// create the relationship where an employee can have multiple phone numbers
-db.employee.hasMany(db.phoneNumbers, { as: "numbers" });
-db.phoneNumbers.belongsTo(db.employee, {
-  foreignKey: "employeeId",
+db.doctor = require("./model.js")(sequelize, Sequelize);
+db.appointments = require("./contact-number.js")(sequelize, Sequelize);
+
+// create the relationship where a patient can have multiple phone numbers
+db.doctor.hasMany(db.appointments, { as: "numbers" });
+db.appointments.belongsTo(db.doctor, {
+  foreignKey: "doctorId",
   as: "user",
 });
 

@@ -1,15 +1,23 @@
 // This module is used to define the structure for the phone numbers
-module.exports = (sequelize, DataTypes) => {
-  const ContactNumber = sequelize.define('contactNumber', {
-    phoneNumber: {
-      type: DataTypes.STRING,
+module.exports = (sequelize, Sequelize) => {
+  const AppointmentNumber = sequelize.define('contactNumber', {
+    name: {
+      type: Sequelize.STRING,
       allowNull: false
     },
-    type: {
-      type: DataTypes.STRING,
+    kind: {
+      type: Sequelize.STRING,
       allowNull: false
+    },
+    appointmentTime: {
+      type: Sequelize.TIME,
+      allowNull: false
+    },
+    appointmentDate: {
+      type : Sequelize.DATEONLY,
+      
     }
   });
 
-  return ContactNumber;
+  return AppointmentNumber;
 };
