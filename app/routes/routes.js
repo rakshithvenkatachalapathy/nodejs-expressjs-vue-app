@@ -1,35 +1,29 @@
 // This module is used to define the routes for the api calls
 module.exports = app => {
-  const doctor = require("../controllers/controller.js");
+  const employee = require("../controllers/controller.js");
 
   var router = require("express").Router();
 
-  // Create a new Doctor
-  router.post("/", doctor.create);
+  // Create a new Employee
+  router.post("/", employee.create);
 
-  router.post("/appointments", doctor.createPhoneNumber);
+  router.post("/numbers", employee.createPhoneNumber);
 
-  // Retrieve all Doctors
-  router.get("/", doctor.findAll);
+  // Retrieve all Employee
+  router.get("/", employee.findAll);
 
-  // Retrieve a single Doctor with fname and lname
-  router.get("/:firstName/:lastName", doctor.findByName);
+  // Retrieve a single Employee with id
+  router.get("/:firstName/:lastName", employee.findByName);
 
-  // Retrieve a  Doctor with name and date
-  router.get("/appointments/:id/:appointmentDate", doctor.findByIdAndDate);
+  // Update a Employee with id
+  router.put("/:id", employee.update);
 
-  // Update a Doctor with id
-  router.put("/:id", doctor.update);
+  // Delete a Employee with id
+  router.delete("/:id", employee.delete);
 
-  // Delete a Doctor with id
-  router.delete("/:id", doctor.delete);
-
-  // Delete a Appointment with id
-  router.delete("/appointments/:id", doctor.deleteAppoinment);
-
-  // Delete all Doctor
-  router.delete("/", doctor.deleteAll);
+  // Delete all Employee
+  router.delete("/", employee.deleteAll);
 
   // the default api which will be extended with the routes given above 
-  app.use('/api/doctors', router);
+  app.use('/api/employees', router);
 };

@@ -1,6 +1,6 @@
 //This module is used to define the structure for the employees
 module.exports = (sequelize, Sequelize) => {
-  const Patient = sequelize.define("doctor", {
+  const Employee = sequelize.define("employee", {
     firstName: {
       type: Sequelize.STRING,
       allowNull: false
@@ -8,10 +8,13 @@ module.exports = (sequelize, Sequelize) => {
     lastName: {
       type: Sequelize.STRING
     },
-    email: {
+    address: {
       type: Sequelize.STRING
+    },
+    dateOfJoining: {
+      type: Sequelize.DATEONLY
     }
   });
 
-  return Patient;
+  return Employee;
 };
