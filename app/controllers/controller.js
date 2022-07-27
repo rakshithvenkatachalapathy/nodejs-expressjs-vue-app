@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     address: req.body.address,
     dateOfJoining: req.body.dateOfJoining
   };
-
+  console.log(employee)
   // Save Employee in the database
   Employee.create(employee)
     .then(data => {
